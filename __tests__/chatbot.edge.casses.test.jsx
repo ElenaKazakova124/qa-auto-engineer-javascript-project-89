@@ -1,13 +1,13 @@
 import { vi } from 'vitest';
-import Widget from "/Users/Elena/qa-auto-engineer-javascript-project-89/src/components/Widget.jsx"; 
 
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()
-})); 
+}));
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../src/App';
+import Widget from "../src/components/Widget.jsx";
 
 test('Обработка слишком длинного адреса', async () => {
   render(<App />);
