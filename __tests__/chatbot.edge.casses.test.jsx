@@ -1,4 +1,5 @@
 import { vi } from 'vitest';
+import Widget from "/Users/Elena/qa-auto-engineer-javascript-project-89/src/components/Widget.jsx"; 
 
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()
