@@ -1,9 +1,8 @@
 import { vi } from 'vitest';
-import Widget from "@/components/Widget"; 
 
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()
-}));
+})); 
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
