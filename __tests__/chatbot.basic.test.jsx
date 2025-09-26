@@ -3,7 +3,16 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import Widget from '@hexlet/chatbot-v2'
-import steps from '@hexlet/chatbot-v2/example-steps'
+
+const steps = [
+  {
+    name: "welcome",
+    message: "Добро пожаловать!",
+    options: [
+      { label: "Начать", value: "start" }
+    ]
+  }
+];
 
 describe('Тестирование отображения компонентов', () => {
   test('Все основные элементы интерфейса присутствуют', () => {

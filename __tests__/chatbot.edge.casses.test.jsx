@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import ChatBot from "@/components/Widget";
+import Widget from "@/components/Widget"; 
 
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()

@@ -3,8 +3,9 @@ import ChatBot from '@hexlet/chatbot-v2';
 import '@hexlet/chatbot-v2/styles';
 
 const Widget = ({ steps }) => {
-  return <ChatBot steps={steps} />;
+  const safeSteps = Array.isArray(steps) ? steps : [];
+  
+  return <ChatBot steps={safeSteps} />;
 };
-
 
 export default Widget;
