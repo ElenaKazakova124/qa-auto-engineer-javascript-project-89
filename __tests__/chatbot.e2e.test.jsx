@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 import Widget from '@hexlet/chatbot-v2';
+vi.mock('@hexlet/chatbot-v2');
 
 describe('E2E тестирование чат-бота', () => {
   test('handles quick reply buttons', async () => {

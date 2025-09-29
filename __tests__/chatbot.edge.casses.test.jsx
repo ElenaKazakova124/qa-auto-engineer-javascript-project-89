@@ -3,7 +3,7 @@ import { vi } from 'vitest';
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()
 }));
-
+vi.mock('@hexlet/chatbot-v2');
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../src/App';

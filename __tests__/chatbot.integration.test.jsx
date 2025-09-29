@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-
+vi.mock('@hexlet/chatbot-v2');
 describe('Интеграционное тестирование с фикстурами', () => {
   test('Чат-бот должен поддерживать конфигурацию из фикстур', () => {
 

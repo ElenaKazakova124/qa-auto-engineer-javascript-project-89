@@ -4,6 +4,23 @@ import '@testing-library/jest-dom'
 
 import Widget from '@hexlet/chatbot-v2'
 
+import { vi } from 'vitest';
+import ChatBot from "@/components/Widget";
+
+
+vi.mock('@hexlet/chatbot-v2');
+
+describe('Тестирование отображения компонентов', () => {
+  test('Все основные элементы интерфейса присутствуют', () => {
+    render(<ChatBot />);
+    
+    expect(screen.getByTestId('chat-input')).toBeInTheDocument();
+    expect(screen.getByTestId('send-button')).toBeInTheDocument();
+    expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
+  });
+});
+
+
 const steps = [
   {
     name: "welcome",
