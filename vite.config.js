@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/setupTests.jsx',
+    setupFiles: './src/components/setupTests.jsx',
     css: true,
     deps: {
       inline: ['@hexlet/chatbot-v2']
