@@ -7,7 +7,7 @@ import { vi } from 'vitest';
 vi.mock('@hexlet/chatbot-v2');
 vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
 
-import ChatBot from "@/components/Widget";
+import ChatBot from "../src/components/Widget";
 
 describe('Тестирование отображения компонентов', () => {
   test('Все основные элементы интерфейса присутствуют', () => {

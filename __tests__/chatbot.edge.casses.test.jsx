@@ -10,7 +10,8 @@ vi.mock('@hexlet/chatbot-v2/styles', () => ({}));
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()
 }));
-import ChatBot from "@/components/Widget";
+
+import ChatBot from "../src/components/Widget";
 
 test('Обработка слишком длинного адреса', async () => {
   render(<App />);

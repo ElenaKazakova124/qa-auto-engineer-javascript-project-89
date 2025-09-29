@@ -8,7 +8,7 @@ import Widget from '@hexlet/chatbot-v2';
 vi.mock('@hexlet/chatbot-v2');
 vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
 
-import ChatBot from "@/components/Widget";
+import ChatBot from "../src/components/Widget";
 
 describe('E2E тестирование чат-бота', () => {
   test('handles quick reply buttons', async () => {
