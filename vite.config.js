@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/components/setupTests.jsx',
+    setupFiles: './src/setupTests.jsx', 
     css: true,
     deps: {
       inline: ['@hexlet/chatbot-v2']
@@ -17,7 +17,7 @@ export default defineConfig({
     alias: {
       '@hexlet/chatbot-v2/dist/init.css': resolve(__dirname, 'src/__mocks__/css/init.css'),
       '@hexlet/chatbot-v2/styles': resolve(__dirname, 'src/__mocks__/css/init.css'),
-      '@': resolve(__dirname, './src') 
+      '@': resolve(__dirname, 'src')
     }
   }
 })

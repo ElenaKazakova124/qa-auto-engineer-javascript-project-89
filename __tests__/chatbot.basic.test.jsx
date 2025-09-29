@@ -3,11 +3,11 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Widget from '@hexlet/chatbot-v2'
 import { vi } from 'vitest';
-import ChatBot from "@/components/Widget";
-
 
 vi.mock('@hexlet/chatbot-v2');
 vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
+
+import ChatBot from "@/components/Widget";
 
 describe('Тестирование отображения компонентов', () => {
   test('Все основные элементы интерфейса присутствуют', () => {
@@ -18,7 +18,6 @@ describe('Тестирование отображения компонентов
     expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
   });
 });
-
 
 const steps = [
   {

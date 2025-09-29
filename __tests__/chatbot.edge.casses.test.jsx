@@ -4,11 +4,13 @@ import userEvent from '@testing-library/user-event';
 import App from '../src/App';
 import Widget from "../src/components/Widget.jsx";
 
+vi.mock('@hexlet/chatbot-v2');
+vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
+
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()
 }));
-vi.mock('@hexlet/chatbot-v2');
-vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
+import ChatBot from "@/components/Widget";
 
 test('Обработка слишком длинного адреса', async () => {
   render(<App />);

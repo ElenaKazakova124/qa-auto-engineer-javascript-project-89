@@ -4,6 +4,8 @@ import '@testing-library/jest-dom';
 vi.mock('@hexlet/chatbot-v2');
 vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
 
+import ChatBot from "@/components/Widget";
+
 describe('Интеграционное тестирование с фикстурами', () => {
   test('Чат-бот должен поддерживать конфигурацию из фикстур', () => {
 
