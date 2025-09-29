@@ -1,13 +1,14 @@
 import { vi } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import App from '../src/App';
+import Widget from "../src/components/Widget.jsx";
 
 vi.mock('../api/chatbot', () => ({
   sendMessage: vi.fn()
 }));
 vi.mock('@hexlet/chatbot-v2');
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import App from '../src/App';
-import Widget from "../src/components/Widget.jsx";
+vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
 
 test('Обработка слишком длинного адреса', async () => {
   render(<App />);

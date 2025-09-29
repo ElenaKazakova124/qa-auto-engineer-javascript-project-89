@@ -3,9 +3,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
-
 import Widget from '@hexlet/chatbot-v2';
+
 vi.mock('@hexlet/chatbot-v2');
+vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
 
 describe('E2E тестирование чат-бота', () => {
   test('handles quick reply buttons', async () => {
