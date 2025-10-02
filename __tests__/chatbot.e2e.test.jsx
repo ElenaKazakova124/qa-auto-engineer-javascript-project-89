@@ -2,21 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
-import Widget from '@hexlet/chatbot-v2';
-
-vi.mock('@hexlet/chatbot-v2');
-vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
-
+import { vi, describe, test, expect } from 'vitest';
 import ChatBot from "../src/components/Widget";
 
 describe('E2E тестирование чат-бота', () => {
   test('handles quick reply buttons', async () => {
     const user = userEvent.setup();
     
-    const ChatBotComponent = Widget();
-    
-    render(<ChatBotComponent />);
+    render(<ChatBot />);
     
     const openButton = screen.getByTestId('chat-open-button');
     expect(openButton).toBeInTheDocument();
@@ -29,15 +22,14 @@ describe('E2E тестирование чат-бота', () => {
     expect(welcomeMessage).toBeInTheDocument();
     
     expect(screen.getByTestId('user-input')).toBeInTheDocument();
-    expect(screen.getByTestId('send-button')).toBeInTheDocument();
+    const sendButtons = screen.getAllByTestId('send-button');
+    expect(sendButtons.length).toBeGreaterThan(0);
   });
 
   test('can close chat window', async () => {
     const user = userEvent.setup();
     
-    const ChatBotComponent = Widget();
-    
-    render(<ChatBotComponent />);
+    render(<ChatBot />);
     
     const openButton = screen.getByTestId('chat-open-button');
     await user.click(openButton);

@@ -1,11 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { vi } from 'vitest';
-
-vi.mock('@hexlet/chatbot-v2');
-vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
-
+import { vi, describe, test, expect } from 'vitest';
 import ChatBot from "../src/components/Widget";
 
 const steps = [

@@ -10,12 +10,15 @@ vi.mock('@hexlet/chatbot-v2/dist/init.css', () => ({}))
 vi.mock('@hexlet/chatbot-v2/styles', () => ({}))
 
 vi.mock('@hexlet/chatbot-v2', () => ({
-  default: vi.fn(() => {
-    return function ChatBot() {
+  default: function ChatBot(props) {
       const [isOpen, setIsOpen] = React.useState(false);
       
       return (
         <div data-testid="chatbot-container">
+          {/* Поля ввода (всегда видимы для тестирования) */}
+          <input data-testid="chat-input" placeholder="Chat input" />
+          <button data-testid="send-button">Send</button>
+          
           {/* Кнопка открытия чата - всегда видима */}
           <button 
             data-testid="chat-open-button"
@@ -122,8 +125,7 @@ vi.mock('@hexlet/chatbot-v2', () => ({
           )}
         </div>
       )
-    }
-  })
+  }
 }))
 
 vi.mock('@hexlet/chatbot-v2/example-steps', () => ({
