@@ -16,7 +16,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@hexlet/chatbot-v2/dist/init.css': resolve(__dirname, 'src/__mocks__/css/init.css'),
-      '@hexlet/chatbot-v2/styles': resolve(__dirname, 'src/__mocks__/css/init.css'),
       '@': resolve(__dirname, './src')
     }
   }

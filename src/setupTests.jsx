@@ -7,7 +7,6 @@ vi.mock('*.scss', () => ({}))
 vi.mock('*.sass', () => ({}))
 
 vi.mock('@hexlet/chatbot-v2/dist/init.css', () => ({}))
-vi.mock('@hexlet/chatbot-v2/styles', () => ({}))
 
 vi.mock('@hexlet/chatbot-v2', () => ({
   default: function ChatBot(props) {
@@ -127,7 +126,6 @@ vi.mock('@hexlet/chatbot-v2', () => ({
       )
   }
 }))
-
 vi.mock('@hexlet/chatbot-v2/example-steps', () => ({
   default: [
     {
