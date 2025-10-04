@@ -1,5 +1,5 @@
 import { vi, describe, test, expect, beforeEach } from 'vitest';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, waitFor, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../src/App';
 import { FormPage } from './pages';
@@ -16,18 +16,24 @@ describe('Edge Cases тестирование формы', () => {
   });
 
   test('Обработка слишком длинного адреса', async () => {
-    render(<App />);
+    await act(async () => {
+      render(<App />);
+    });
     
     const longAddress = 'a'.repeat(501);
     
-    await formPage.fillForm({
-      email: 'test@example.com',
-      password: 'password123',
-      address: longAddress,
-      acceptRules: true
+    await act(async () => {
+      await formPage.fillForm({
+        email: 'test@example.com',
+        password: 'password123',
+        address: longAddress,
+        acceptRules: true
+      });
     });
     
-    await formPage.submitForm();
+    await act(async () => {
+      await formPage.submitForm();
+    });
     
     await waitFor(() => {
       const error = formPage.getAddressError();
@@ -36,23 +42,31 @@ describe('Edge Cases тестирование формы', () => {
   });
 
   test('Обработка некорректного email', async () => {
-    render(<App />);
+    await act(async () => {
+      render(<App />);
+    });
     
     // Заполним все поля кроме email с валидными значениями
-    await formPage.fillForm({
-      password: 'password123',  
-      address: 'Test address',
-      country: 'Россия',
-      acceptRules: true
+    await act(async () => {
+      await formPage.fillForm({
+        password: 'password123',  
+        address: 'Test address',
+        country: 'Россия',
+        acceptRules: true
+      });
     });
     
     // Теперь добавим невалидный email
     // Используем формат который пройдет HTML5 валидацию, но не пройдет нашу
-    await formPage.fillEmail('test@test');
+    await act(async () => {
+      await formPage.fillEmail('test@test');
+    });
     
     expect(formPage.emailInput).toHaveValue('test@test');
     
-    await formPage.submitForm();
+    await act(async () => {
+      await formPage.submitForm();
+    });
     
     // Ждем появления ошибки валидации
     await waitFor(() => {
@@ -70,9 +84,13 @@ describe('Edge Cases тестирование формы', () => {
   });
 
   test('Обработка пустых обязательных полей', async () => {
-    render(<App />);
+    await act(async () => {
+      render(<App />);
+    });
     
-    await formPage.submitForm();
+    await act(async () => {
+      await formPage.submitForm();
+    });
     
     await waitFor(() => {
       const emailError = formPage.getEmailError();
@@ -83,15 +101,21 @@ describe('Edge Cases тестирование формы', () => {
   });
 
   test('Обработка непринятых правил', async () => {
-    render(<App />);
-    
-    await formPage.fillForm({
-      email: 'test@example.com',
-      password: 'password123',
-      acceptRules: false
+    await act(async () => {
+      render(<App />);
     });
     
-    await formPage.submitForm();
+    await act(async () => {
+      await formPage.fillForm({
+        email: 'test@example.com',
+        password: 'password123',
+        acceptRules: false
+      });
+    });
+    
+    await act(async () => {
+      await formPage.submitForm();
+    });
     
     await waitFor(() => {
       const error = formPage.getRulesError();
@@ -100,17 +124,23 @@ describe('Edge Cases тестирование формы', () => {
   });
 
   test('Валидация email при различных форматах', async () => {
-    render(<App />);
+    await act(async () => {
+      render(<App />);
+    });
     
     // Сначала заполним остальные обязательные поля
-    await formPage.fillForm({
-      password: 'password123',
-      acceptRules: true
+    await act(async () => {
+      await formPage.fillForm({
+        password: 'password123',
+        acceptRules: true
+      });
     });
     
     // Тест 1: Проверяем пустой email
-    await formPage.clearEmail();
-    await formPage.submitForm();
+    await act(async () => {
+      await formPage.clearEmail();
+      await formPage.submitForm();
+    });
     
     await waitFor(() => {
       const error = screen.queryByText(/email обязателен/i);
@@ -119,9 +149,11 @@ describe('Edge Cases тестирование формы', () => {
     
     // Тест 2: Проверяем email без доменной зоны (test@test)
     // Этот формат пройдет HTML5 валидацию, но не пройдет нашу regex
-    await formPage.clearEmail();
-    await formPage.fillEmail('test@test');
-    await formPage.submitForm();
+    await act(async () => {
+      await formPage.clearEmail();
+      await formPage.fillEmail('test@test');
+      await formPage.submitForm();
+    });
     
     await waitFor(() => {
       const error = screen.queryByText(/некорректный email/i);
@@ -129,8 +161,10 @@ describe('Edge Cases тестирование формы', () => {
     });
     
     // Тест 3: Проверяем успешную валидацию с корректным email
-    await formPage.clearEmail();
-    await formPage.fillEmail('test@example.com');
+    await act(async () => {
+      await formPage.clearEmail();
+      await formPage.fillEmail('test@example.com');
+    });
     
     // Не отправляем форму, просто проверяем что ошибка исчезла
     const noError = screen.queryByText(/некорректный email|email обязателен/i);
@@ -138,18 +172,24 @@ describe('Edge Cases тестирование формы', () => {
   });
 
   test('Успешная отправка формы с валидными данными', async () => {
-    render(<App />);
-    
-    await formPage.fillForm({
-      email: 'valid@example.com',
-      password: 'securePassword123',
-      address: 'Невский проспект, 12',
-      city: 'Санкт-Петербург',
-      country: 'Россия',
-      acceptRules: true
+    await act(async () => {
+      render(<App />);
     });
     
-    await formPage.submitForm();
+    await act(async () => {
+      await formPage.fillForm({
+        email: 'valid@example.com',
+        password: 'securePassword123',
+        address: 'Невский проспект, 12',
+        city: 'Санкт-Петербург',
+        country: 'Россия',
+        acceptRules: true
+      });
+    });
+    
+    await act(async () => {
+      await formPage.submitForm();
+    });
     
     await waitFor(() => {
       expect(formPage.isSuccessMessageVisible()).toBe(true);
