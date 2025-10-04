@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Widget from './components/Widget';
 
 // Импорты для чат-бота с проверкой существования
-let steps = [];
+let steps = null;
 try {
   steps = require('@hexlet/chatbot-v2/example-steps');
 } catch (e) {
-  // Если файл не найден, используем пустой массив
-  steps = [];
+  // Если файл не найден, используем null
+  steps = null;
 }
 
 try {
@@ -205,7 +205,7 @@ const App = () => {
   return (
     <>
       {submittingState === "fillingForm" ? renderForm() : renderResult()}
-      <Widget steps={steps} />
+      {steps && <Widget steps={steps} />}
     </>
   );
 };
