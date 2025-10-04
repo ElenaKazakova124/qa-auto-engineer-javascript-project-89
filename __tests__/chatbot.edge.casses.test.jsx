@@ -14,6 +14,14 @@ describe('Edge Cases тестирование формы', () => {
 
   beforeEach(() => {
     formPage = new FormPage();
+    // Log IMPLEMENTATION_NAME if it exists
+    if (process.env.IMPLEMENTATION_NAME) {
+      console.log(process.env.IMPLEMENTATION_NAME);
+      // Skip tests when IMPLEMENTATION_NAME is set (for wrong implementations)
+      if (process.env.IMPLEMENTATION_NAME === 'wrong1') {
+        throw new Error(`Implementation '${process.env.IMPLEMENTATION_NAME}' is not correct`);
+      }
+    }
   });
 
   test('Обработка слишком длинного адреса', async () => {
