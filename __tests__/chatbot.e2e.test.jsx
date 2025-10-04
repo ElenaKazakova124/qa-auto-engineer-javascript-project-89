@@ -9,6 +9,12 @@ vi.mock('@hexlet/chatbot-v2', () => ({
   default: ({ steps = [] }) => {
     const MockChatBot = () => {
       const [isOpen, setIsOpen] = React.useState(false);
+      
+      // Проверяем что steps переданы правильно
+      if (!Array.isArray(steps)) {
+        throw new Error('Steps must be an array');
+      }
+      
       return (
         <div data-testid="chatbot-container">
           <input data-testid="chat-input" placeholder="Chat input" />
@@ -59,30 +65,50 @@ describe('E2E тестирование чат-бота', () => {
 
   test('chatbot widget renders without errors', async () => {
     // Простой тест что компонент рендерится без ошибок
-    expect(() => {
-      render(<ChatBot steps={[]} />);
-    }).not.toThrow();
+    render(<ChatBot steps={[]} />);
+    
+    // Проверяем что основные элементы присутствуют
+    expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
+    expect(screen.getByTestId('chat-open-button')).toBeInTheDocument();
+    
+    // Проверяем что чат изначально закрыт
+    expect(screen.queryByTestId('chat-window')).not.toBeInTheDocument();
   });
 
   test('chatbot widget accepts steps prop', async () => {
     // Тест что компонент принимает steps prop
     const testSteps = [{ id: 1, message: 'Test' }];
-    expect(() => {
-      render(<ChatBot steps={testSteps} />);
-    }).not.toThrow();
+    render(<ChatBot steps={testSteps} />);
+    
+    // Проверяем что компонент рендерится с переданными steps
+    expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
+    
+    // Открываем чат и проверяем что welcome сообщение присутствует
+    await chatBotPage.openChat();
+    expect(screen.getByTestId('welcome-message')).toBeInTheDocument();
   });
 
   test('chatbot widget handles empty steps', async () => {
     // Тест что компонент обрабатывает пустые steps
-    expect(() => {
-      render(<ChatBot steps={[]} />);
-    }).not.toThrow();
+    render(<ChatBot steps={[]} />);
+    
+    // Проверяем что компонент рендерится даже с пустыми steps
+    expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
+    
+    // Открываем чат и проверяем что welcome сообщение все равно присутствует
+    await chatBotPage.openChat();
+    expect(screen.getByTestId('welcome-message')).toBeInTheDocument();
   });
 
   test('chatbot widget handles undefined steps', async () => {
     // Тест что компонент обрабатывает undefined steps
-    expect(() => {
-      render(<ChatBot />);
-    }).not.toThrow();
+    render(<ChatBot />);
+    
+    // Проверяем что компонент рендерится даже без steps
+    expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
+    
+    // Открываем чат и проверяем что welcome сообщение присутствует
+    await chatBotPage.openChat();
+    expect(screen.getByTestId('welcome-message')).toBeInTheDocument();
   });
 });

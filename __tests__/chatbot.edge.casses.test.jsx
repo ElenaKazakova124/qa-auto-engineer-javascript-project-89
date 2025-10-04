@@ -1,5 +1,6 @@
 import { vi, describe, test, expect, beforeEach } from 'vitest';
-import { render, waitFor, screen, act } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
+import { act } from 'react';
 import '@testing-library/jest-dom';
 import App from '../src/App';
 import { FormPage } from './pages';
@@ -38,7 +39,12 @@ describe('Edge Cases тестирование формы', () => {
     await waitFor(() => {
       const error = formPage.getAddressError();
       expect(error).toBeInTheDocument();
+      expect(error).toHaveTextContent('Слишком длинный адрес');
     });
+    
+    // Проверяем что форма не отправилась
+    expect(formPage.isFormVisible()).toBe(true);
+    expect(formPage.isSuccessMessageVisible()).toBe(false);
   });
 
   test('Обработка некорректного email', async () => {
@@ -77,6 +83,7 @@ describe('Edge Cases тестирование формы', () => {
       // И проверяем ошибку
       const emailError = screen.queryByText(/некорректный email/i);
       expect(emailError).toBeInTheDocument();
+      expect(emailError).toHaveTextContent('Некорректный email');
     });
     
     expect(formPage.isFormVisible()).toBe(true);
@@ -97,7 +104,15 @@ describe('Edge Cases тестирование формы', () => {
       const passwordError = formPage.getPasswordError();
       expect(emailError).toBeInTheDocument();
       expect(passwordError).toBeInTheDocument();
+      
+      // Проверяем конкретные тексты ошибок
+      expect(emailError).toHaveTextContent('Email обязателен');
+      expect(passwordError).toHaveTextContent('Пароль обязателен');
     });
+    
+    // Проверяем что форма не отправилась
+    expect(formPage.isFormVisible()).toBe(true);
+    expect(formPage.isSuccessMessageVisible()).toBe(false);
   });
 
   test('Обработка непринятых правил', async () => {
@@ -120,7 +135,12 @@ describe('Edge Cases тестирование формы', () => {
     await waitFor(() => {
       const error = formPage.getRulesError();
       expect(error).toBeInTheDocument();
+      expect(error).toHaveTextContent('Необходимо принять правила');
     });
+    
+    // Проверяем что форма не отправилась
+    expect(formPage.isFormVisible()).toBe(true);
+    expect(formPage.isSuccessMessageVisible()).toBe(false);
   });
 
   test('Валидация email при различных форматах', async () => {
@@ -145,6 +165,7 @@ describe('Edge Cases тестирование формы', () => {
     await waitFor(() => {
       const error = screen.queryByText(/email обязателен/i);
       expect(error).toBeInTheDocument();
+      expect(error).toHaveTextContent('Email обязателен');
     });
     
     // Тест 2: Проверяем email без доменной зоны (test@test)
@@ -158,6 +179,7 @@ describe('Edge Cases тестирование формы', () => {
     await waitFor(() => {
       const error = screen.queryByText(/некорректный email/i);
       expect(error).toBeInTheDocument();
+      expect(error).toHaveTextContent('Некорректный email');
     });
     
     // Тест 3: Проверяем успешную валидацию с корректным email

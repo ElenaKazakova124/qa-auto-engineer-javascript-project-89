@@ -5,9 +5,15 @@ import { vi, describe, test, expect } from 'vitest';
 
 // Add mock directly in test file
 vi.mock('@hexlet/chatbot-v2', () => ({
-  default: () => {
+  default: ({ steps = [] }) => {
     const MockChatBot = () => {
       const [isOpen, setIsOpen] = React.useState(false);
+      
+      // Проверяем что steps переданы правильно
+      if (!Array.isArray(steps)) {
+        throw new Error('Steps must be an array');
+      }
+      
       return (
         <div data-testid="chatbot-container">
           <input data-testid="chat-input" placeholder="Chat input" />
@@ -63,17 +69,29 @@ describe('Тестирование отображения компонентов
   test('Все основные элементы интерфейса присутствуют', () => {
     render(<ChatBot steps={steps}/>);
     
+    // Проверяем основные элементы контейнера
     expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
     expect(screen.getByTestId('chat-input')).toBeInTheDocument();
     expect(screen.getByTestId('send-button')).toBeInTheDocument();
-    expect(screen.getByTestId('chat-open-button')).toBeInTheDocument()
+    expect(screen.getByTestId('chat-open-button')).toBeInTheDocument();
     
-    fireEvent.click(screen.getByTestId('chat-open-button'))
+    // Проверяем что чат изначально закрыт
+    expect(screen.queryByTestId('chat-window')).not.toBeInTheDocument();
     
-    expect(screen.getByTestId('chat-window')).toBeInTheDocument()
-    expect(screen.getByTestId('chat-header')).toBeInTheDocument()
-    expect(screen.getByTestId('chat-messages')).toBeInTheDocument()
-    expect(screen.getByTestId('welcome-message')).toBeInTheDocument()
-    expect(screen.getByTestId('user-input')).toBeInTheDocument()
-  })
+    // Открываем чат
+    fireEvent.click(screen.getByTestId('chat-open-button'));
+    
+    // Проверяем что все элементы чата присутствуют
+    expect(screen.getByTestId('chat-window')).toBeInTheDocument();
+    expect(screen.getByTestId('chat-header')).toBeInTheDocument();
+    expect(screen.getByTestId('chat-messages')).toBeInTheDocument();
+    expect(screen.getByTestId('welcome-message')).toBeInTheDocument();
+    expect(screen.getByTestId('user-input')).toBeInTheDocument();
+    
+    // Проверяем что заголовок чата содержит правильный текст
+    expect(screen.getByTestId('chat-header')).toHaveTextContent('Чат-бот');
+    
+    // Проверяем что welcome сообщение содержит правильный текст
+    expect(screen.getByTestId('welcome-message')).toHaveTextContent('Добро пожаловать в чат-бот!');
+  });
 });

@@ -6,11 +6,7 @@ const Widget = ({ steps = [] }) => {
   // Ensure steps is always an array, even if undefined or null is passed
   const safeSteps = Array.isArray(steps) ? steps : [];
   
-  // If no valid steps, don't render the chatbot
-  if (safeSteps.length === 0) {
-    return null;
-  }
-  
+  // Always render the chatbot, even with empty steps
   return <ChatBot steps={safeSteps} />;
 };
 
