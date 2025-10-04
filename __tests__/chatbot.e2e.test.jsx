@@ -1,44 +1,99 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { vi, describe, test, expect } from 'vitest';
+import { vi, describe, test, expect, beforeEach } from 'vitest';
+import { ChatBotPage } from './pages';
+
+// Add mock directly in test file
+vi.mock('@hexlet/chatbot-v2', () => ({
+  default: () => {
+    const MockChatBot = () => {
+      const [isOpen, setIsOpen] = React.useState(false);
+      return (
+        <div data-testid="chatbot-container">
+          <input data-testid="chat-input" placeholder="Chat input" />
+          <button data-testid="send-button">Send</button>
+          <button 
+            data-testid="chat-open-button"
+            onClick={() => setIsOpen(true)}
+          >
+            💬
+          </button>
+          {isOpen && (
+            <div data-testid="chat-window">
+              <div data-testid="chat-header">
+                <h3>Чат-бот</h3>
+                <button 
+                  data-testid="chat-close-button"
+                  onClick={() => setIsOpen(false)}
+                >
+                  ×
+                </button>
+              </div>
+              <div data-testid="chat-messages">
+                <div data-testid="welcome-message">
+                  Добро пожаловать в чат-бот!
+                </div>
+              </div>
+              <div>
+                <input data-testid="user-input" placeholder="Введите сообщение..." />
+                <button data-testid="send-button">Отправить</button>
+              </div>
+            </div>
+          )}
+        </div>
+      )
+    };
+    return <MockChatBot />;
+  }
+}))
+
 import ChatBot from "../src/components/Widget";
 
 describe('E2E тестирование чат-бота', () => {
+  let chatBotPage;
+
+  beforeEach(() => {
+    chatBotPage = new ChatBotPage();
+  });
+
   test('handles quick reply buttons', async () => {
-    const user = userEvent.setup();
-    
     render(<ChatBot />);
     
-    const openButton = screen.getByTestId('chat-open-button');
-    expect(openButton).toBeInTheDocument();
-    await user.click(openButton);
+    expect(chatBotPage.isChatButtonVisible()).toBe(true);
+    await chatBotPage.openChat();
     
-    const chatWindow = screen.getByTestId('chat-window');
-    expect(chatWindow).toBeInTheDocument();
-    
-    const welcomeMessage = screen.getByTestId('welcome-message');
-    expect(welcomeMessage).toBeInTheDocument();
-    
-    expect(screen.getByTestId('user-input')).toBeInTheDocument();
-    const sendButtons = screen.getAllByTestId('send-button');
-    expect(sendButtons.length).toBeGreaterThan(0);
+    expect(chatBotPage.isChatOpen()).toBe(true);
+    expect(chatBotPage.isWelcomeMessageVisible()).toBe(true);
+    expect(chatBotPage.chatInput).toBeInTheDocument();
+    expect(chatBotPage.sendButton).toBeInTheDocument();
   });
 
   test('can close chat window', async () => {
-    const user = userEvent.setup();
-    
     render(<ChatBot />);
     
-    const openButton = screen.getByTestId('chat-open-button');
-    await user.click(openButton);
+    await chatBotPage.openChat();
+    expect(chatBotPage.isChatOpen()).toBe(true);
     
-    expect(screen.getByTestId('chat-window')).toBeInTheDocument();
+    await chatBotPage.closeChat();
+    expect(chatBotPage.isChatClosed()).toBe(true);
+  });
+
+  test('can type and send messages', async () => {
+    render(<ChatBot />);
     
-    const closeButton = screen.getByTestId('chat-close-button');
-    await user.click(closeButton);
+    await chatBotPage.openChat();
+    await chatBotPage.typeMessage('Тестовое сообщение');
     
-    expect(screen.queryByTestId('chat-window')).not.toBeInTheDocument();
+    expect(chatBotPage.getInputValue()).toBe('Тестовое сообщение');
+  });
+
+  test('displays chat header correctly', async () => {
+    render(<ChatBot />);
+    
+    await chatBotPage.openChat();
+    const title = chatBotPage.getChatTitle();
+    
+    expect(title).toContain('Чат-бот');
   });
 });

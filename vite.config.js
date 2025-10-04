@@ -11,6 +11,22 @@ export default defineConfig({
     css: true,
     deps: {
       inline: ['@hexlet/chatbot-v2']
+    },
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html', 'lcov'],
+      exclude: [
+        'node_modules/',
+        'src/setupTests.jsx',
+        '**/*.test.{js,jsx}',
+        '**/*.spec.{js,jsx}',
+        '**/test-utils/**',
+        '**/__mocks__/**',
+        '**/__fixtures__/**',
+        'scripts/**',
+        'dist/**',
+        'coverage/**'
+      ]
     }
   },
   resolve: {

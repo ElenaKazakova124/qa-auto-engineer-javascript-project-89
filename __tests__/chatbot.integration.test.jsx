@@ -1,8 +1,10 @@
 import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 
-vi.mock('@hexlet/chatbot-v2');
-vi.mock('@hexlet/chatbot-v2/styles', () => ({})); 
+// Add simple mock for integration test
+vi.mock('@hexlet/chatbot-v2', () => ({
+  default: () => <div>MockedChatBot</div>
+}))
 
 import ChatBot from "../src/components/Widget";
 

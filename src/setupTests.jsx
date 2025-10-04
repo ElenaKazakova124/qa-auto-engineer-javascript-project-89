@@ -7,7 +7,7 @@ vi.mock('*.scss', () => ({}))
 vi.mock('*.sass', () => ({}))
 
 vi.mock('@hexlet/chatbot-v2', () => ({
-  default: function ChatBot(props) {
+  default: function ChatBot() {
       const [isOpen, setIsOpen] = React.useState(false);
       
       return (
@@ -124,6 +124,7 @@ vi.mock('@hexlet/chatbot-v2', () => ({
       )
   }
 }))
+
 vi.mock('@hexlet/chatbot-v2/example-steps', () => ({
   default: [
     {
