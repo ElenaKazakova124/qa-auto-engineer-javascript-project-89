@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { vi, describe, test, expect, beforeEach } from 'vitest';
+import { act } from 'react';
 import { ChatBotPage } from './pages';
 
 // Add mock directly in test file
@@ -84,7 +85,9 @@ describe('E2E тестирование чат-бота', () => {
     expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
     
     // Открываем чат и проверяем что welcome сообщение присутствует
-    await chatBotPage.openChat();
+    await act(async () => {
+      await chatBotPage.openChat();
+    });
     expect(screen.getByTestId('welcome-message')).toBeInTheDocument();
   });
 
@@ -96,7 +99,9 @@ describe('E2E тестирование чат-бота', () => {
     expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
     
     // Открываем чат и проверяем что welcome сообщение все равно присутствует
-    await chatBotPage.openChat();
+    await act(async () => {
+      await chatBotPage.openChat();
+    });
     expect(screen.getByTestId('welcome-message')).toBeInTheDocument();
   });
 
@@ -108,7 +113,9 @@ describe('E2E тестирование чат-бота', () => {
     expect(screen.getByTestId('chatbot-container')).toBeInTheDocument();
     
     // Открываем чат и проверяем что welcome сообщение присутствует
-    await chatBotPage.openChat();
+    await act(async () => {
+      await chatBotPage.openChat();
+    });
     expect(screen.getByTestId('welcome-message')).toBeInTheDocument();
   });
 });
