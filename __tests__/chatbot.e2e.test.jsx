@@ -16,6 +16,8 @@ vi.mock('@hexlet/chatbot-v2', () => ({
         throw new Error('Steps must be an array');
       }
       
+      // Always render the chatbot, even with empty steps
+      
       return (
         <div data-testid="chatbot-container">
           <input data-testid="chat-input" placeholder="Chat input" />
