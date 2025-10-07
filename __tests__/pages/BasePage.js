@@ -6,7 +6,6 @@ class BasePage {
     this.user = userEvent.setup();
   }
 
-  // Общие методы для работы с элементами
   async click(element) {
     await this.user.click(element);
   }
@@ -31,7 +30,6 @@ class BasePage {
     await this.user.unhover(element);
   }
 
-  // Методы для поиска элементов
   getByText(text) {
     return screen.getByText(text);
   }
@@ -72,7 +70,6 @@ class BasePage {
     return screen.queryByPlaceholderText(text);
   }
 
-  // Методы для ожидания
   async waitForElement(callback, options = {}) {
     return waitFor(callback, options);
   }
@@ -83,7 +80,6 @@ class BasePage {
     }, options);
   }
 
-  // Утилиты
   isElementVisible(element) {
     return element !== null && element !== undefined;
   }
@@ -112,7 +108,6 @@ class BasePage {
     return element ? element.checked : false;
   }
 
-  // Скриншоты и отладка
   debug(element = null) {
     if (element) {
       screen.debug(element);

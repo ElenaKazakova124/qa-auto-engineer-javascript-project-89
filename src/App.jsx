@@ -1,128 +1,96 @@
 import React, { useState } from 'react';
-import Widget from './components/Widget';
-
-// Импорты для чат-бота с проверкой существования
-let steps = null;
-try {
-  steps = require('@hexlet/chatbot-v2/example-steps');
-} catch (e) {
-  // Если файл не найден, используем null
-  steps = null;
-}
-
-try {
-  require('@hexlet/chatbot-v2/styles');
-} catch (e) {
-  // Стили не критичны для тестов
-}
 
 const App = () => {
   const [form, setForm] = useState({
-    email: '',
-    password: '',
-    address: '',
-    city: '',
-    country: '',
-    acceptRules: false
+    email: "",
+    password: "",
+    city: "",
+    country: "",
+    address: "",
+    acceptRules: false,
   });
-  const [submittingState, setSubmittingState] = useState('fillingForm');
-  
-  const [errors, setErrors] = useState({});
+  const [submittingState, setSubmittingState] = useState("fillingForm");
 
-  const handleChangeField = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm(prevForm => ({
-      ...prevForm,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-    
-    if (errors[name]) {
-      setErrors(prevErrors => ({
-        ...prevErrors,
-        [name]: ''
-      }));
-    }
+  const handleChangeField = ({ target }) => {
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    setForm({ ...form, [target.name]: value });
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-    console.log('Validating form with email:', form.email);
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!form.email) {
-      newErrors.email = 'Email обязателен';
-      console.log('Email is empty');
-    } else if (!emailRegex.test(form.email)) {
-      newErrors.email = 'Некорректный email';
-      console.log('Email is invalid:', form.email);
-    }
-    
-    if (!form.password) {
-      newErrors.password = 'Пароль обязателен';
-    }
-    
-    if (form.address.length > 500) {
-      newErrors.address = 'Слишком длинный адрес';
-    }
-    
-    if (!form.acceptRules) {
-      newErrors.acceptRules = 'Необходимо принять правила';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const handleBackToForm = () => {
+    setSubmittingState("fillingForm");
   };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log('Form submitted');
-    if (validateForm()) {
-      console.log('Form is valid, submitting...');
-      setSubmittingState('submitted');
-    } else {
-      console.log('Form has errors, not submitting');
-    }
+    setSubmittingState("submitted");
+  };
+
+  const enToRus = {
+    email: "Email",
+    password: "Пароль",
+    city: "Город",
+    country: "Страна",
+    address: "Адрес",
+    acceptRules: "Принять правила",
+  }
+
+  const renderRow = (key) => (
+    <tr key={key}>
+      <td>{enToRus[key]}</td>
+      <td>{form[key].toString()}</td>
+    </tr>
+  );
+
+  const renderResult = () => {
+    const keys = Object.keys(form).sort();
+    return (
+      <div className="m-3">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleBackToForm}
+        >
+          Назад
+        </button>
+        <table className="table">
+          <tbody>{keys.map(renderRow)}</tbody>
+        </table>
+      </div>
+    );
   };
 
   const renderForm = () => (
     <form className="m-3" onSubmit={handleSubmitForm} name="myForm">
-     <div className="col-md-6 mb-3">
-  <label htmlFor="email" className="col-form-label">
-    Email
-  </label>
-  <input
-    autoComplete="on"
-    type="email"
-    name="email"
-    onChange={handleChangeField}
-    value={form.email}
-    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-    id="email"
-    placeholder="Email"
-  />
-  {errors.email && (
-    <div className="invalid-feedback">{errors.email}</div>
-  )}
-</div>
       <div className="col-md-6 mb-3">
-  <label htmlFor="password" className="col-form-label">
-    Пароль
-  </label>
-  <input
-    autoComplete="on"
-    type="password"
-    onChange={handleChangeField}
-    value={form.password}
-    name="password"
-    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-    id="password"
-    placeholder="Пароль"
-  />
-  {errors.password && (
-    <div className="invalid-feedback">{errors.password}</div>
-  )}
-</div>
-
+        <label htmlFor="email" className="col-form-label">
+          Email
+        </label>
+        <input
+          autoComplete="on"
+          type="email"
+          name="email"
+          onChange={handleChangeField}
+          value={form.email}
+          className="form-control"
+          id="email"
+          placeholder="Email"
+        />
+      </div>
+      <div className="col-md-6 mb-3">
+        <label htmlFor="password" className="col-form-label">
+          Пароль
+        </label>
+        <input
+          autoComplete="on"
+          type="password"
+          onChange={handleChangeField}
+          value={form.password}
+          name="password"
+          className="form-control"
+          id="password"
+          placeholder="Пароль"
+        />
+      </div>
       <div className="col-md-6 mb-3">
         <label htmlFor="address" className="col-form-label">
           Адрес
@@ -132,13 +100,10 @@ const App = () => {
           name="address"
           value={form.address}
           onChange={handleChangeField}
-          className={`form-control ${errors.address ? 'is-invalid' : ''}`}
+          className="form-control"
           id="address"
           placeholder="Невский проспект, 12"
         />
-        {errors.address && (
-          <div className="invalid-feedback">{errors.address}</div>
-        )}
       </div>
       <div className="col-md-6 mb-3">
         <label htmlFor="city" className="col-form-label">
@@ -172,40 +137,30 @@ const App = () => {
         </select>
       </div>
       <div className="col-md-6 mb-3">
-  <div className="form-check">
-    <label className="form-check-label" htmlFor="rules">
-      <input
-        autoComplete="on"
-        id="rules"
-        name="acceptRules"
-        className={`form-check-input ${errors.acceptRules ? 'is-invalid' : ''}`}
-        onChange={handleChangeField}
-        type="checkbox"
-        checked={form.acceptRules}
-      />
-      Принять правила
-    </label>
-    {errors.acceptRules && (
-      <div className="invalid-feedback d-block">{errors.acceptRules}</div>
-    )}
-  </div>
-</div>
+        <div className="form-check">
+          <label className="form-check-label" htmlFor="rules">
+            <input
+              autoComplete="on"
+              id="rules"
+              name="acceptRules"
+              className="form-check-input"
+              onChange={handleChangeField}
+              type="checkbox"
+              checked={form.acceptRules}
+            />
+            Принять правила
+          </label>
+        </div>
+      </div>
       <button type="submit" className="btn btn-primary">
         Зарегистрироваться
       </button>
     </form>
   );
 
-  const renderResult = () => (
-    <div>
-      <h2>Форма успешно отправлена!</h2>
-    </div>
-  );
-
   return (
     <>
       {submittingState === "fillingForm" ? renderForm() : renderResult()}
-      {steps && <Widget steps={steps} />}
     </>
   );
 };

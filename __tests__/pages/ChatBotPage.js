@@ -6,7 +6,6 @@ class ChatBotPage {
     this.user = userEvent.setup();
   }
 
-  // Селекторы
   get openButton() {
     return screen.getByTestId('chat-open-button');
   }
@@ -44,7 +43,6 @@ class ChatBotPage {
     return screen.queryByTestId('chatbot-container');
   }
 
-  // Действия
   async openChat() {
     await this.user.click(this.openButton);
   }
@@ -81,7 +79,6 @@ class ChatBotPage {
     }
   }
 
-  // Проверки
   isChatOpen() {
     return this.chatWindow !== null;
   }
@@ -122,7 +119,7 @@ class ChatBotPage {
   }
 
   hasQuickReplyButtons() {
-    return screen.queryAllByRole('button').length > 2; // More than open/close buttons
+    return screen.queryAllByRole('button').length > 2; 
   }
 
   async clickQuickReply(text) {
@@ -132,7 +129,6 @@ class ChatBotPage {
     }
   }
 
-  // Ожидания
   async waitForMessage(text, timeout = 3000) {
     return new Promise((resolve) => {
       const startTime = Date.now();

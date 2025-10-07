@@ -6,7 +6,6 @@ class FormPage {
     this.user = userEvent.setup();
   }
 
-  // Селекторы
   get emailInput() {
     return screen.getByLabelText(/email/i);
   }
@@ -39,7 +38,6 @@ class FormPage {
     return screen.getByText(/форма успешно отправлена/i);
   }
 
-  // Методы для получения ошибок
   getEmailError() {
     return screen.queryByText(/некорректный email|email обязателен/i);
   }
@@ -56,7 +54,6 @@ class FormPage {
     return screen.queryByText(/необходимо принять правила/i);
   }
 
-  // Действия
   async fillEmail(email) {
     await this.user.type(this.emailInput, email);
   }
@@ -102,7 +99,6 @@ class FormPage {
     await this.user.clear(this.passwordInput);
   }
 
-  // Проверки
   isSuccessMessageVisible() {
     return screen.queryByText(/форма успешно отправлена/i) !== null;
   }
