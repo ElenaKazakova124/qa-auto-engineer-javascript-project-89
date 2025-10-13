@@ -1,4 +1,4 @@
-import { expect, test, vi, beforeAll, describe} from 'vitest';
+import { expect, test, vi, beforeAll } from 'vitest';
 import Widget from '@hexlet/chatbot-v2';
 import { render,screen } from '@testing-library/react';
 import steps from '../__fixtures__/steps';
