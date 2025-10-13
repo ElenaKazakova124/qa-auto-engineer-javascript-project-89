@@ -1,4 +1,3 @@
-QA Auto Engineer JavaScript Project
 Testing the chatbot widget
 
 Описание проекта
