@@ -1,5 +1,5 @@
 import { expect } from 'vitest'
-import textSet from '../__fixtures__/steps.js'
+import textSet from '../__fixtures__/text-set.js'
 import '@testing-library/jest-dom/vitest'
 
 export class WidgetPage {

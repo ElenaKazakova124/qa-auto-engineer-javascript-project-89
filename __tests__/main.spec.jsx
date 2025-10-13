@@ -1,8 +1,9 @@
-import { expect, test, vi, beforeAll} from 'vitest';
+import { expect, test, vi, beforeAll, describe} from 'vitest';
 import Widget from '@hexlet/chatbot-v2';
 import { render,screen } from '@testing-library/react';
 import steps from '../__fixtures__/steps';
 import userEvent from '@testing-library/user-event';
+import { WidgetPage } from '../pages/widget-page.js'
 
 beforeAll(() => {
     window.HTMLElement.prototype.scrollIntoView = vi.fn();
@@ -107,4 +108,23 @@ test( async () => {
     await user.click(screen.getByRole('button', { name: 'Начать разговор' }));
     
     expect(screen.getByRole('button', { name: 'Я разработчик, хочу углубить свои знания' })).toBeInTheDocument();
+})
+
+test('Check interface, negative version', async () => {
+    const user = userEvent.setup()
+    
+    render(Widget(steps))
+    window.HTMLElement.prototype.scrollIntoView = vi.fn()
+
+    const openChatButtons = screen.queryAllByRole('button', { name: 'Открыть Чат' })
+    await user.click(openChatButtons[0])
+    
+    const closeButtons = screen.queryAllByRole('button', { name: 'Close' })
+    await user.click(closeButtons[0])
+    
+    await user.click(openChatButtons[0])
+    
+    await user.click(closeButtons[0])
+
+    expect(screen.queryAllByRole('button', { name: 'Открыть Чат' }).length).toBeGreaterThan(0)
 })
