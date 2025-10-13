@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Widget from '@hexlet/chatbot-v2';
+import steps from '@hexlet/chatbot-v2/example-steps';
+import '@hexlet/chatbot-v2/styles';
 
 const App = () => {
   const [form, setForm] = useState({
@@ -161,6 +164,7 @@ const App = () => {
   return (
     <>
       {submittingState === "fillingForm" ? renderForm() : renderResult()}
+      {Widget(steps)}
     </>
   );
 };
