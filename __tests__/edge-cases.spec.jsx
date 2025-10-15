@@ -12,17 +12,12 @@ afterEach(() => {
   cleanup()
 })
 
-test('Пустые данные - пустой массив', () => {
+test(async () => {
   render(Widget([]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
-test('Корректные данные', () => {
-  render(Widget(steps))
-  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
-})
-
-test('Быстрые множественные клики', async () => {
+test(async () => {
   const user = userEvent.setup()
   render(Widget(steps))
 
@@ -34,7 +29,7 @@ test('Быстрые множественные клики', async () => {
   expect(screen.getByText('Начать разговор')).toBeInTheDocument()
 })
 
-test('Открытие и закрытие', async () => {
+test(async () => {
   const user = userEvent.setup()
   render(Widget(steps))
 
@@ -43,7 +38,7 @@ test('Открытие и закрытие', async () => {
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
-test('Множественные клики по кнопке закрытия', async () => {
+test(async () => {
   const user = userEvent.setup()
   render(Widget(steps))
 
@@ -56,7 +51,7 @@ test('Множественные клики по кнопке закрытия',
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
-test('Цикл открытия-закрытия', async () => {
+test(async () => {
   const user = userEvent.setup()
   render(Widget(steps))
 
@@ -66,4 +61,26 @@ test('Цикл открытия-закрытия', async () => {
   }
 
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
+})
+
+test(async () => {
+  const user = userEvent.setup()
+  render(Widget(steps))
+
+  await user.click(screen.getByText('Открыть Чат'))
+  await user.click(screen.getByText('Открыть Чат'))
+  await user.click(screen.getByText('Открыть Чат'))
+
+  expect(screen.getByText('Начать разговор')).toBeInTheDocument()
+})
+
+test(async () => {
+  const user = userEvent.setup()
+  render(Widget(steps))
+
+  await user.click(screen.getByText('Открыть Чат'))
+  await user.click(screen.getByLabelText('Close'))
+  await user.click(screen.getByText('Открыть Чат'))
+
+  expect(screen.getByText('Начать разговор')).toBeInTheDocument()
 })
