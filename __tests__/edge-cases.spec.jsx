@@ -67,3 +67,26 @@ test(async () => {
 
   expect(screen.getByRole('button', { name: 'Начать разговор' })).toBeInTheDocument()
 })
+
+test(async () => {
+  const user = userEvent.setup()
+  render(Widget(steps))
+
+  await user.click(screen.getByRole('button', { name: 'Открыть Чат' }))
+  await user.click(screen.getByRole('button', { name: 'Начать разговор' }))
+  await user.click(screen.getByRole('button', { name: 'Close' }))
+
+  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
+})
+
+test(async () => {
+  const user = userEvent.setup()
+  render(Widget(steps))
+
+  await user.click(screen.getByRole('button', { name: 'Открыть Чат' }))
+  await user.click(screen.getByRole('button', { name: 'Начать разговор' }))
+  await user.click(screen.getByRole('button', { name: 'Сменить профессию или трудоустроиться' }))
+  await user.click(screen.getByRole('button', { name: 'Close' }))
+
+  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
+})
