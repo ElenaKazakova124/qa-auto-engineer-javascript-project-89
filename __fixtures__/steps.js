@@ -8,7 +8,7 @@ export default [
       {
         text: 'Начать разговор',
         nextStepId: 'start',
-        type: "button",
+        type: 'button',
       },
     ],
   },
@@ -21,7 +21,7 @@ export default [
       {
         text: 'Попробовать себя в IT',
         nextStepId: 'try',
-        type: "button",
+        type: 'button',
       },
     ],
   },
@@ -34,8 +34,8 @@ export default [
       {
         text: 'Вернуться назад',
         nextStepId: 'start',
-        type: "button",
+        type: 'button',
       },
     ],
   },
-];
+]

@@ -1,50 +1,50 @@
-import React, { useState } from 'react';
-import Widget from '@hexlet/chatbot-v2';
+import { useState } from 'react'
+import Widget from '@hexlet/chatbot-v2'
 import steps from '../__fixtures__/steps.js'
 
 const App = () => {
   const [form, setForm] = useState({
-    email: "",
-    password: "",
-    city: "",
-    country: "",
-    address: "",
+    email: '',
+    password: '',
+    city: '',
+    country: '',
+    address: '',
     acceptRules: false,
-  });
-  const [submittingState, setSubmittingState] = useState("fillingForm");
+  })
+  const [submittingState, setSubmittingState] = useState('fillingForm')
 
   const handleChangeField = ({ target }) => {
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    setForm({ ...form, [target.name]: value });
-  };
-
-  const handleBackToForm = () => {
-    setSubmittingState("fillingForm");
-  };
-
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    setSubmittingState("submitted");
-  };
-
-  const enToRus = {
-    email: "Email",
-    password: "Пароль",
-    city: "Город",
-    country: "Страна",
-    address: "Адрес",
-    acceptRules: "Принять правила",
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    setForm({ ...form, [target.name]: value })
   }
 
-  const renderRow = (key) => (
+  const handleBackToForm = () => {
+    setSubmittingState('fillingForm')
+  }
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault()
+    setSubmittingState('submitted')
+  }
+
+  const enToRus = {
+    email: 'Email',
+    password: 'Пароль',
+    city: 'Город',
+    country: 'Страна',
+    address: 'Адрес',
+    acceptRules: 'Принять правила',
+  }
+
+  const renderRow = key => (
     <tr key={key}>
       <td>{enToRus[key]}</td>
       <td>{form[key].toString()}</td>
     </tr>
-  );
+  )
 
   const renderResult = () => {
-    const keys = Object.keys(form).sort();
+    const keys = Object.keys(form).sort()
     return (
       <div className="m-3">
         <button
@@ -58,8 +58,8 @@ const App = () => {
           <tbody>{keys.map(renderRow)}</tbody>
         </table>
       </div>
-    );
-  };
+    )
+  }
 
   const renderForm = () => (
     <form className="m-3" onSubmit={handleSubmitForm} name="myForm">
@@ -158,14 +158,14 @@ const App = () => {
         Зарегистрироваться
       </button>
     </form>
-  );
+  )
 
   return (
     <>
-      {submittingState === "fillingForm" ? renderForm() : renderResult()}
+      {submittingState === 'fillingForm' ? renderForm() : renderResult()}
       {Widget(steps)}
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

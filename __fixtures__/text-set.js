@@ -1,64 +1,64 @@
 const textSet = {
-    openChat:
+  openChat:
       'Привет! Я ваш виртуальный помощник. Нажмите "Начать разговор", чтобы открыть чат',
-    startConversation:
+  startConversation:
       'Помогу вам выбрать подходящий курс. Выбирайте категорию вопроса, и буквально через пару шагов я смогу рассказать вам то, что нужно.',
-    changeProfession:
+  changeProfession:
       'У нас есть программы обучения новой профессии. Мы постоянно мониторим, какие компетенции востребованы на рынке, а учебные программы строим в соответствии ними. Учиться можно онлайн в удобном темпе без дедлайнов. К концу обучения у вас будет портфолио на GitHub. А к трудоустройству поможет подготовиться Карьерный трек',
-    tryIT:
+  tryIT:
       'У нас есть подготовительные курсы, которые длятся всего 2 недели.За это время вы знакомитесь с основами программирвоания, пробуете его на практике и плавной подойдете к старту обучения в основной программе. Все это под руководством опытного программиста. Он поможет, если будут сложности. Курс стоит всего 990 рублей',
-    developerText1:
+  developerText1:
       'Отлично! Есть несколько вариантов обучения для тех, кто хочет углубить знания. Во-первых, курсы повышения квалификации. Часто их оплачивает работодатель. Если вам кажется, что такой вариант возможен, поделитесь с ним этой ссылкой: https://b2b.hexlet.io/.',
-    developerText2:
+  developerText2:
       'Во-вторых, возможно индивидуальное обучение. Вы с наставником-разработчиком составляете план и углубляетесь в темы, которые хотите изучить подробнее.',
-    tellMoreText1:
+  tellMoreText1:
       'В Хекслете можно освоить JavaScript, Python, PHP, верстку, Java, DevOps и Ruby on Rails. Также есть программы обучения по тестированию веб-приложений и аналитике данных. https://ru.hexlet.io/courses#preparatory',
-    tellMoreText2:
+  tellMoreText2:
       /Только не тратьте много времени на выбор языка*/,
-    simpler:
+  simpler:
       'У нас есть подготовительные курсы, которые длятся всего 2 недели.За это время вы знакомитесь с основами программирвоания, пробуете его на практике и плавной подойдете к старту обучения в основной программе. Все это под руководством опытного программиста. Он поможет, если будут сложности. Курс стоит всего 990 рублей',
-    stayHereText1:
+  stayHereText1:
       'Ага, дублирую ссылку https://ru.hexlet.io/courses#preparatory',
-    stayHereText2:
+  stayHereText2:
       /Был рад знакомству! Увидимся */,
-    interstingText1:
+  interstingText1:
       'В Хекслете можно освоить JavaScript, Python, PHP, верстку, Java, DevOps и Ruby on Rails. Также есть программы обучения по тестированию веб-приложений и аналитике данных. https://ru.hexlet.io/courses#preparatory',
-    interstingText2:
+  interstingText2:
       /Только не тратьте много времени на выбор языка*/,
-    aboutChangingProfessions:
+  aboutChangingProfessions:
       'У нас есть программы обучения новой профессии. Мы постоянно мониторим, какие компетенции востребованы на рынке, а учебные программы строим в соответствии ними. Учиться можно онлайн в удобном темпе без дедлайнов. К концу обучения у вас будет портфолио на GitHub. А к трудоустройству поможет подготовиться Карьерный трек',
-    signUpButton:
+  signUpButton:
       'Зарегистрироваться',
-    moveBackButtonApp:
+  moveBackButtonApp:
       'Назад',
-    openChatButton:
+  openChatButton:
       'Открыть Чат',
-    startConversationButton:
+  startConversationButton:
       'Начать разговор',
-    changeProfessionButton:
+  changeProfessionButton:
       'Сменить профессию или трудоустроиться',
-    tryITButton:
+  tryITButton:
       'Попробовать себя в IT',
-    developerButton:
+  developerButton:
       'Я разработчик, хочу углубить свои знания',
-    tellMoreButton:
+  tellMoreButton:
       'Расскажи подробнее',
-    simplerButton:
+  simplerButton:
       'А есть что-нибудь попроще',
-    backButton:
+  backButton:
       'Вернуться в начало',
-    interestingButton:
+  interestingButton:
       'Интересно',
-    aboutChangingProfessionsButton:
+  aboutChangingProfessionsButton:
       'А что по поводу смены профессии?',
-    goBackButton:
+  goBackButton:
       'Вернуться назад',
-    takeMeBackButton:
+  takeMeBackButton:
       'Верни меня в начало',
-    stayHereButton:
+  stayHereButton:
       'Останусь здесь, запишусь на курс',
-    closeButton:
+  closeButton:
       'Close',
-  }
-  
-  export default textSet
+}
+
+export default textSet

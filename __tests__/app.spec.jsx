@@ -10,12 +10,12 @@ beforeEach(() => {
   render(<App />)
 })
 
-test( () => {
+test(() => {
   const appPage = new App(screen)
   appPage.checkRegisterButton()
 })
 
-test( async () => {
+test(async () => {
   const user = userEvent.setup()
   const appPage = new AppPage(screen)
   await appPage.inputEmailField(user, 'emailtest@gmail.com')
@@ -31,7 +31,7 @@ test( async () => {
   expect(appPage.checkbox).toBeInTheDocument()
 })
 
-test( async () => {
+test(async () => {
   const user = userEvent.setup()
   window.HTMLElement.prototype.scrollIntoView = vi.fn()
   const widgetPage = new WidgetPage(screen)
