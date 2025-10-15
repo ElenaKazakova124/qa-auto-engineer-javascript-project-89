@@ -30,7 +30,7 @@ test('Быстрые множественные клики', async () => {
   await user.click(openButton)
   await user.click(openButton)
   await user.click(openButton)
-  
+
   expect(screen.getByText('Начать разговор')).toBeInTheDocument()
 })
 
@@ -52,7 +52,7 @@ test('Множественные клики по кнопке закрытия',
   await user.click(closeButton)
   await user.click(closeButton)
   await user.click(closeButton)
-  
+
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
@@ -64,6 +64,6 @@ test('Цикл открытия-закрытия', async () => {
     await user.click(screen.getByText('Открыть Чат'))
     await user.click(screen.getByLabelText('Close'))
   }
-  
+
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
