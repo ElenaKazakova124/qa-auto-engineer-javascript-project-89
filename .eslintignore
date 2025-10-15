@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+coverage/
+public/
+*.config.js
+*.config.mjs
+jest-setup.js
+vitest.setup.js

@@ -8,9 +8,11 @@ import { fileURLToPath } from 'url'
 import vitest from '@vitest/eslint-plugin'
 
 const gitIgnorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
+const eslintIgnorePath = fileURLToPath(new URL('.eslintignore', import.meta.url))
 
 export default defineConfig([
   includeIgnoreFile(gitIgnorePath),
+  includeIgnoreFile(eslintIgnorePath),
   {
     ignores: ['node_modules/**', 'dist/**', 'build/**', 'coverage/**', 'public/**', '*.config.js', '*.config.mjs'],
   },
