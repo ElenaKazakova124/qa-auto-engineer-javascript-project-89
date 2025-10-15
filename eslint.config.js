@@ -12,7 +12,7 @@ const gitIgnorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 export default defineConfig([
   includeIgnoreFile(gitIgnorePath),
   {
-    ignores: ['node_modules/**', 'dist/**', 'build/**', 'coverage/**', 'public/**', '*.config.js', '*.config.mjs', 'jest-setup.js', 'vitest.setup.js'],
+    ignores: ['node_modules/**', 'dist/**', 'build/**', 'coverage/**', 'public/**', '*.config.js', '*.config.mjs'],
   },
   stylistic.configs.recommended,
   { files: ['**/*.{js,mjs,cjs,jsx}'], plugins: { js }, extends: ['js/recommended'] },
@@ -45,8 +45,12 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.node,
+        ...globals.browser,
         global: 'readonly',
         vi: 'readonly',
+        console: 'readonly',
+        IntersectionObserver: 'readonly',
+        matchMedia: 'readonly',
       },
     },
   },

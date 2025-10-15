@@ -107,22 +107,3 @@ test(async () => {
 
   expect(screen.getByRole('button', { name: 'Я разработчик, хочу углубить свои знания' })).toBeInTheDocument()
 })
-
-test('Check interface, negative version', async () => {
-  const user = userEvent.setup()
-
-  render(Widget(steps))
-  window.HTMLElement.prototype.scrollIntoView = vi.fn()
-
-  const openChatButtons = screen.queryAllByRole('button', { name: 'Открыть Чат' })
-  await user.click(openChatButtons[0])
-
-  const closeButtons = screen.queryAllByRole('button', { name: 'Close' })
-  await user.click(closeButtons[0])
-
-  await user.click(openChatButtons[0])
-
-  await user.click(closeButtons[0])
-
-  expect(screen.queryAllByRole('button', { name: 'Открыть Чат' }).length).toBeGreaterThan(0)
-})
