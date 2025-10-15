@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom'
+import { vi } from 'vitest'
 
 global.console = {
   ...console,
-  error: jest.fn(),
-  warn: jest.fn(),
+  error: vi.fn(),
+  warn: vi.fn(),
 }
 
 global.IntersectionObserver = class IntersectionObserver {

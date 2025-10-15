@@ -21,7 +21,7 @@ export default defineConfig([
   {
     settings: {
       react: {
-        version: 'detect',
+        version: '19.1.1',
       },
     },
     rules: {
@@ -31,7 +31,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['tests/**'], 
+    files: ['tests/**'],
     plugins: {
       vitest,
     },
@@ -44,10 +44,9 @@ export default defineConfig([
     files: ['jest-setup.js', 'vitest.setup.js', '**/*.spec.js', '**/*.spec.jsx', '**/*.test.js', '**/*.test.jsx'],
     languageOptions: {
       globals: {
-        ...globals.jest,
         ...globals.node,
         global: 'readonly',
-        jest: 'readonly',
+        vi: 'readonly',
       },
     },
   },
