@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom/vitest'
 import userEvent from '@testing-library/user-event'
 import { test, expect, beforeEach, vi } from 'vitest'
-import AppPage from '../pages/app-page.jsx'
-import WidgetPage from '../pages/widget-page.jsx'
+import AppPage from './pages/app-page.jsx'
+import WidgetPage from './pages/widget-page.js'
 import steps from '../__fixtures__/steps'
 
 beforeEach(() => {

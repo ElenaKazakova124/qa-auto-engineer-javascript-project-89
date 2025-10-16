@@ -1,6 +1,7 @@
 import { expect } from 'vitest'
 import { screen, render } from '@testing-library/react'
-import App from '../src/App.jsx'
+import App from '../../src/App.jsx'
+import { formLabels, buttonTexts } from '../../utils/constants'
 
 class AppPage {
   static renderApp() {
@@ -8,35 +9,35 @@ class AppPage {
   }
 
   static get emailInput() {
-    return screen.getByLabelText('Email')
+    return screen.getByLabelText(formLabels.email)
   }
 
   static get passwordInput() {
-    return screen.getByLabelText('Пароль')
+    return screen.getByLabelText(formLabels.password)
   }
 
   static get addressInput() {
-    return screen.getByLabelText('Адрес')
+    return screen.getByLabelText(formLabels.address)
   }
 
   static get cityInput() {
-    return screen.getByLabelText('Город')
+    return screen.getByLabelText(formLabels.city)
   }
 
   static get countrySelect() {
-    return screen.getByLabelText('Страна')
+    return screen.getByLabelText(formLabels.country)
   }
 
   static get checkbox() {
-    return screen.getByLabelText('Принять правила')
+    return screen.getByLabelText(formLabels.acceptRules)
   }
 
   static get submitButton() {
-    return screen.getByRole('button', { name: 'Зарегистрироваться' })
+    return screen.getByRole('button', { name: buttonTexts.submit })
   }
 
   static get backButton() {
-    return screen.getByRole('button', { name: 'Назад' })
+    return screen.getByRole('button', { name: buttonTexts.back })
   }
 
   static async inputEmailField(user, value) {
