@@ -1,6 +1,6 @@
 import { expect } from 'vitest'
 import { screen, render, fireEvent } from '@testing-library/react'
-import getWidget from '@hexlet/chatbot-v2'
+import Widget from '@hexlet/chatbot-v2'
 
 const startButtonText = 'Открыть Чат'
 const conversationButtonText = 'Начать разговор'
@@ -12,7 +12,7 @@ const optionTexts = [
 
 class WidgetPage {
   static renderWidget(steps) {
-    render(getWidget(steps))
+    render(Widget(steps))
   }
 
   static get startButton() {
