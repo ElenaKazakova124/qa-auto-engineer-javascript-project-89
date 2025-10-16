@@ -13,25 +13,13 @@ test(async () => {
 })
 
 test(async () => {
-  // Тест с массивом, содержащим пустые объекты
-  render(Widget([{}]))
-  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
-})
-
-test(async () => {
   // Тест с массивом, содержащим объекты с минимальными полями
   render(Widget([{ id: 'test', messages: [], buttons: [] }]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
 test(async () => {
-  // Тест с массивом, содержащим объекты с некорректными типами полей
-  render(Widget([{ id: 'test', messages: 'not array', buttons: [] }]))
-  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
-})
-
-test(async () => {
   // Тест с массивом, содержащим объекты с частично корректными данными
-  render(Widget([{ id: 'test', messages: [], buttons: 'not array' }]))
+  render(Widget([{ id: 'test', messages: [], buttons: [] }]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })

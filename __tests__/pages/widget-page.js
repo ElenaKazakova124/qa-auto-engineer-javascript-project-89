@@ -2,13 +2,21 @@ import { expect } from 'vitest'
 import { screen, render, fireEvent } from '@testing-library/react'
 import getWidget from '@hexlet/chatbot-v2'
 
+const startButtonText = 'Открыть Чат'
+const conversationButtonText = 'Начать разговор'
+const optionTexts = [
+  'Сменить профессию или трудоустроиться',
+  'Попробовать себя в IT',
+  'Я разработчик, хочу углубить свои знания',
+]
+
 class WidgetPage {
   static renderWidget(steps) {
     render(getWidget(steps))
   }
 
   static get startButton() {
-    return screen.getByText('Открыть Чат')
+    return screen.getByText(startButtonText)
   }
 
   static clickStartButton() {
@@ -16,7 +24,7 @@ class WidgetPage {
   }
 
   static get conversationButton() {
-    return screen.getByText('Начать разговор')
+    return screen.getByText(conversationButtonText)
   }
 
   static clickConversationButton() {
@@ -24,11 +32,6 @@ class WidgetPage {
   }
 
   static expectOptionsVisible() {
-    const optionTexts = [
-      'Сменить профессию или трудоустроиться',
-      'Попробовать себя в IT',
-      'Я разработчик, хочу углубить свои знания',
-    ]
     optionTexts.forEach((text) => {
       expect(screen.getByText(text)).toBeInTheDocument()
     })
