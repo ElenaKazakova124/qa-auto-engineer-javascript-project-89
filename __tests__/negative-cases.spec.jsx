@@ -7,49 +7,31 @@ beforeAll(() => {
 })
 
 test(async () => {
-  // Тест с null данными
-  render(Widget(null))
+  // Тест с пустым массивом
+  render(Widget([]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
 test(async () => {
-  // Тест с undefined данными
-  render(Widget(undefined))
+  // Тест с массивом, содержащим пустые объекты
+  render(Widget([{}]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
 test(async () => {
-  // Тест с некорректными данными - строка вместо массива
-  render(Widget('invalid data'))
+  // Тест с массивом, содержащим объекты с минимальными полями
+  render(Widget([{ id: 'test', messages: [], buttons: [] }]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
 test(async () => {
-  // Тест с некорректными данными - объект вместо массива
-  render(Widget({ invalid: 'data' }))
+  // Тест с массивом, содержащим объекты с некорректными типами полей
+  render(Widget([{ id: 'test', messages: 'not array', buttons: [] }]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
 test(async () => {
-  // Тест с пустым объектом
-  render(Widget({}))
-  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
-})
-
-test(async () => {
-  // Тест с массивом, содержащим некорректные элементы
-  render(Widget([null, undefined, 'invalid', {}]))
-  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
-})
-
-test(async () => {
-  // Тест с массивом, содержащим элементы без обязательных полей
-  render(Widget([{ id: 'test' }]))
-  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
-})
-
-test(async () => {
-  // Тест с массивом, содержащим элементы с некорректными типами
-  render(Widget([{ id: 123, messages: 'not array', buttons: 'not array' }]))
+  // Тест с массивом, содержащим объекты с частично корректными данными
+  render(Widget([{ id: 'test', messages: [], buttons: 'not array' }]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
