@@ -2,10 +2,6 @@ import { useState } from 'react'
 import Widget from '@hexlet/chatbot-v2'
 import steps from '../__fixtures__/steps.js'
 
-const ChatWidget = () => {
-  return Widget(steps)
-}
-
 const App = () => {
   const [form, setForm] = useState({
     email: '',
@@ -167,7 +163,7 @@ const App = () => {
   return (
     <>
       {submittingState === 'fillingForm' ? renderForm() : renderResult()}
-      <ChatWidget />
+      {Widget(steps)}
     </>
   )
 }
