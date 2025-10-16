@@ -1,6 +1,6 @@
 import { expect } from 'vitest'
 import { screen, render } from '@testing-library/react'
-import App from '../../src/App.jsx'
+import App from '../src/App.jsx'
 
 class AppPage {
   static renderApp() {

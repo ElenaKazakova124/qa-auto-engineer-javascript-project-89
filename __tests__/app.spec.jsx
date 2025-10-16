@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom/vitest'
 import userEvent from '@testing-library/user-event'
 import { test, expect, beforeEach, vi } from 'vitest'
-import AppPage from './pages/app-page.jsx'
-import WidgetPage from './pages/widget-page.js'
+import AppPage from '../pages/app-page.jsx'
+import WidgetPage from '../pages/widget-page.jsx'
+import steps from '../__fixtures__/steps'
 
 beforeEach(() => {
   AppPage.renderApp()
@@ -22,15 +23,15 @@ test(async () => {
   expect(AppPage.addressInput).toHaveValue('Мира')
   await AppPage.inputCityField(user, 'Минск')
   expect(AppPage.cityInput).toHaveValue('Минск')
-  await AppPage.selectCountryField(user, ['Беларусь'])
-  expect(AppPage.countrySelect).toHaveValue('Беларусь')
+  await AppPage.selectCountryField(user, 'Россия')
+  expect(AppPage.countrySelect).toHaveValue('Россия')
   expect(AppPage.checkbox).toBeInTheDocument()
 })
 
 test(async () => {
   window.HTMLElement.prototype.scrollIntoView = vi.fn()
-  await WidgetPage.clickStartButton()
-  await WidgetPage.clickConversationButton()
+  WidgetPage.renderWidget(steps)
+  WidgetPage.clickStartButton()
+  WidgetPage.clickConversationButton()
   WidgetPage.expectOptionsVisible()
-  await WidgetPage.clickStartButton()
 })
