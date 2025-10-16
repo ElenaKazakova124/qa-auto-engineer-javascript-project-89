@@ -160,10 +160,15 @@ const App = () => {
     </form>
   )
 
+  const ChatWidget = () => {
+    const WidgetComponent = Widget(steps)
+    return WidgetComponent
+  }
+
   return (
     <>
       {submittingState === 'fillingForm' ? renderForm() : renderResult()}
-      {Widget(steps)}
+      <ChatWidget />
     </>
   )
 }
