@@ -6,7 +6,8 @@ const ChatWidget = () => {
   try {
     const widget = Widget(steps)
     return widget
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Widget rendering error:', error)
     return null
   }

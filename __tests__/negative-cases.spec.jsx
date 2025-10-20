@@ -7,19 +7,16 @@ beforeAll(() => {
 })
 
 test(async () => {
-  // Тест с пустым массивом
   render(Widget([]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
 test(async () => {
-  // Тест с массивом, содержащим объекты с минимальными полями
   render(Widget([{ id: 'test', messages: [], buttons: [] }]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
 
 test(async () => {
-  // Тест с массивом, содержащим объекты с частично корректными данными
   render(Widget([{ id: 'test', messages: [], buttons: [] }]))
   expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
 })
