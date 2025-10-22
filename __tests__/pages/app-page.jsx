@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 import { screen, render } from '@testing-library/react'
 import App from '../../src/App.jsx'
-import { formLabels, buttonTexts } from '../../utils/constants'
+import { formLabels, buttonTexts } from '../utils/constants'
 
 class AppPage {
   static renderApp() {

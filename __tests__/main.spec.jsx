@@ -107,3 +107,18 @@ test(async () => {
 
   expect(screen.getByRole('button', { name: 'Я разработчик, хочу углубить свои знания' })).toBeInTheDocument()
 })
+
+test(async () => {
+  render(Widget([]))
+  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
+})
+
+test(async () => {
+  render(Widget([{ id: 'test', messages: [], buttons: [] }]))
+  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
+})
+
+test(async () => {
+  render(Widget([{ id: 'test', messages: [], buttons: [] }]))
+  expect(screen.getByText('Открыть Чат')).toBeInTheDocument()
+})

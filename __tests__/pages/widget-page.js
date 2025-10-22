@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 import { screen, render, fireEvent } from '@testing-library/react'
 import getWidget from '@hexlet/chatbot-v2'
-import { startButtonText, conversationButtonText, optionTexts } from '../../utils/constants'
+import { startButtonText, conversationButtonText, optionTexts } from '../utils/constants'
 
 class WidgetPage {
   static renderWidget(steps) {

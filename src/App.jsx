@@ -174,7 +174,7 @@ const App = () => {
   return (
     <>
       {submittingState === 'fillingForm' ? renderForm() : renderResult()}
-      <ChatWidget />
+      {Widget(steps)}
     </>
   )
 }
