@@ -2,17 +2,6 @@ import { useState } from 'react'
 import Widget from '@hexlet/chatbot-v2'
 import steps from '../__fixtures__/steps.js'
 
-const ChatWidget = () => {
-  try {
-    const widget = Widget(steps)
-    return widget
-  }
-  catch (error) {
-    console.error('Widget rendering error:', error)
-    return null
-  }
-}
-
 const App = () => {
   const [form, setForm] = useState({
     email: '',
