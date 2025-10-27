@@ -1,3 +1,4 @@
+import React from 'react'
 import { expect } from 'vitest'
 import { screen, render, fireEvent } from '@testing-library/react'
 import getWidget from '@hexlet/chatbot-v2'
@@ -5,7 +6,9 @@ import { startButtonText, conversationButtonText, optionTexts } from '../../__fi
 
 class WidgetPage {
   static render(steps) {
-    render(getWidget(steps))
+    const widget = getWidget(steps)
+    expect(React.isValidElement(widget)).toBe(true)
+    render(widget)
   }
 
   static get startButton() {
