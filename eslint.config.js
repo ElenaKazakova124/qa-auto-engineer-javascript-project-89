@@ -8,22 +8,16 @@ import { fileURLToPath } from 'url'
 import vitest from '@vitest/eslint-plugin'
 
 const gitIgnorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
+const eslintIgnorePath = fileURLToPath(new URL('.eslintignore', import.meta.url))
 
 export default defineConfig([
   includeIgnoreFile(gitIgnorePath),
-  {
-    ignores: ['node_modules/**', 'dist/**', 'build/**', 'coverage/**', 'public/**', '*.config.js', '*.config.mjs'],
-  },
+  includeIgnoreFile(eslintIgnorePath),
   stylistic.configs.recommended,
   { files: ['**/*.{js,mjs,cjs,jsx}'], plugins: { js }, extends: ['js/recommended'] },
   { files: ['**/*.{js,mjs,cjs,jsx}'], languageOptions: { globals: globals.browser } },
   pluginReact.configs.flat.recommended,
   {
-    settings: {
-      react: {
-        version: '19.1.1',
-      },
-    },
     rules: {
       'react/prop-types': [0],
       'react/react-in-jsx-scope': 0,
@@ -38,20 +32,6 @@ export default defineConfig([
     rules: {
       ...vitest.configs.recommended.rules,
       'vitest/max-nested-describe': ['error', { max: 3 }],
-    },
-  },
-  {
-    files: ['jest-setup.js', 'vitest.setup.js', '**/*.spec.js', '**/*.spec.jsx', '**/*.test.js', '**/*.test.jsx'],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.browser,
-        global: 'readonly',
-        vi: 'readonly',
-        console: 'readonly',
-        IntersectionObserver: 'readonly',
-        matchMedia: 'readonly',
-      },
     },
   },
 ])

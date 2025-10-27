@@ -1,10 +1,10 @@
 import { expect } from 'vitest'
 import { screen, render, fireEvent } from '@testing-library/react'
 import getWidget from '@hexlet/chatbot-v2'
-import { startButtonText, conversationButtonText, optionTexts } from '../utils/constants'
+import { startButtonText, conversationButtonText, optionTexts } from '../../__fixtures__/texts'
 
 class WidgetPage {
-  static renderWidget(steps) {
+  static render(steps) {
     render(getWidget(steps))
   }
 
